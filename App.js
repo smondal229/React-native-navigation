@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 //import Component1 from './components/Component1';
 
@@ -23,6 +24,43 @@ function HomeScreen(props){
   );
 }
 
+function ProfileScreen(props){
+  return(
+    <Button
+      title='Profile'
+      onPress={()=>props.navigation.navigate('Profile')}
+    />
+  );
+}
+
+function SettingScreen(props){
+  return(
+    <Button
+      title='Setting'
+      onPress={()=>props.navigation.navigate('Setting')}
+    />
+  );
+}
+
+function ProfileScreen(props){
+  return(
+    <Text>
+      Profile
+    </Text>
+  );
+}
+
+const tabNavigator = createBottomTabNavigator({
+    Profile: ProfileScreen,
+    Setting: SettingScreen,
+  },
+  {
+    initialRouteName: Profile
+  }
+);
+
+const TabContainer = craeteAppContainer(tabNavigator);
+
 function LoginScreen(props){
   return (
     <View>
@@ -35,6 +73,7 @@ function LoginScreen(props){
         user: { JSON.stringify(props.navigation.getParam('user')) }
         Logged In  
       </Text>
+      <TabContainer />
     </View>
   );
 }
